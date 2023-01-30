@@ -12,7 +12,7 @@ public class PayDTO {
 
     private BigDecimal amount;
 
-    private Date date;
+    private String date;
 
     public PayDTO() {super();}
 
@@ -40,11 +40,11 @@ public class PayDTO {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

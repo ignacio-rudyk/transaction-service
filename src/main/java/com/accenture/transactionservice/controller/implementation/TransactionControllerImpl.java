@@ -2,6 +2,7 @@ package com.accenture.transactionservice.controller.implementation;
 
 import com.accenture.transactionservice.controller.TransactionController;
 import com.accenture.transactionservice.dao.TransactionDAO;
+import com.accenture.transactionservice.model.ErrorResponse;
 import com.accenture.transactionservice.model.dto.TransactionDTO;
 import com.accenture.transactionservice.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,28 +19,30 @@ public class TransactionControllerImpl implements TransactionController {
     private TransactionService transactionService;
 
     @Override
-    public ResponseEntity<TransactionDTO> createTransaction(TransactionDTO newTransaction) {
-        TransactionDTO transaction =transactionService.saveTransaction(newTransaction);
-        return new ResponseEntity<TransactionDTO>(transaction, HttpStatus.OK);
+    public ResponseEntity<ErrorResponse> createTransaction(TransactionDTO newTransaction) {
+        TransactionDTO transaction = transactionService.saveTransaction(newTransaction);
+        ErrorResponse errorResponse = new ErrorResponse(transaction);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<TransactionDTO> getTransaction(Long id) {
+    public ResponseEntity<ErrorResponse> getTransaction(Long id) {
         TransactionDTO transaction = transactionService.findById(id);
-        return new ResponseEntity<TransactionDTO>(transaction,HttpStatus.OK);
+        ErrorResponse errorResponse = new ErrorResponse(transaction);
+        return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Boolean> existTransaction(Long id) {
+    public ResponseEntity<ErrorResponse> existTransaction(Long id) {
         Boolean result = transactionService.existsById(id);
-        ResponseEntity<Boolean> response = new ResponseEntity<Boolean>(result, HttpStatus.OK);
-        return response;
+        ErrorResponse errorResponse = new ErrorResponse(result);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<TransactionDTO>> list() {
+    public ResponseEntity<ErrorResponse> list() {
         List<TransactionDTO> result = transactionService.list();
-        ResponseEntity<List<TransactionDTO>> response = new ResponseEntity<List<TransactionDTO>>(result, HttpStatus.OK);
-        return response;
+        ErrorResponse errorResponse = new ErrorResponse(result);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.OK);
     }
 }
