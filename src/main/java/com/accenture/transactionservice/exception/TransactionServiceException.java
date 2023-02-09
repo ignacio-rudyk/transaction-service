@@ -4,8 +4,10 @@ public class TransactionServiceException extends Exception {
 
     private Integer code;
 
-    public TransactionServiceException(Integer code) {
-        this.code = code;
+    private static String TRANSACTION_SERVICE_EXCEPTION = "Hubo un error en el servicio";
+
+    public TransactionServiceException() {
+        this(TRANSACTION_SERVICE_EXCEPTION, -1);
     }
 
     public TransactionServiceException(String message, Integer code) {

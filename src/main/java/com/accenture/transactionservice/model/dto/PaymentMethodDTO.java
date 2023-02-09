@@ -6,6 +6,8 @@ public class PaymentMethodDTO {
 
     private String name;
 
+    private String beanPaymentOperation;
+
     public PaymentMethodDTO() {
         super();
     }
@@ -26,11 +28,21 @@ public class PaymentMethodDTO {
         this.name = name;
     }
 
+    public String getBeanPaymentOperation() {
+        return beanPaymentOperation;
+    }
+
+    public void setBeanPaymentOperation(String beanPaymentOperation) {
+        this.beanPaymentOperation = beanPaymentOperation;
+    }
+
     @Override
     public String toString() {
         return "PaymentMethodDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", beanPaymentOperation='" + beanPaymentOperation + '\'' +
                 '}';
     }
+
 }

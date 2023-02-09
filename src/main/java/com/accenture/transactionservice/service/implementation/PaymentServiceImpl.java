@@ -1,55 +1,27 @@
 package com.accenture.transactionservice.service.implementation;
 
 import com.accenture.transactionservice.dao.PaymentDAO;
-import com.accenture.transactionservice.exception.validation.*;
-import com.accenture.transactionservice.model.dto.PayDTO;
-import com.accenture.transactionservice.model.dto.PaymentMethodDTO;
-import com.accenture.transactionservice.model.dto.TransactionDTO;
+import com.accenture.transactionservice.exception.TransactionInexistentException;
+import com.accenture.transactionservice.exception.TransactionServiceException;
+import com.accenture.transactionservice.exception.validation.FieldNullException;
+import com.accenture.transactionservice.model.dto.*;
+import com.accenture.transactionservice.model.entities.PaymentMethod;
+import com.accenture.transactionservice.model.entities.Transaction;
 import com.accenture.transactionservice.service.PaymentService;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class PaymentServiceImpl implements PaymentService {
-
-    private static String PATTERN_NUMBER_ACCOUNT = "00[0-9]{8}";
-
-    private static String DATE_FORMAT = "ddMMyyyy";
-    private static String DATE_PATTERN = "([0-2][0-9]|3[0-1])(0[1-9]|1[0-2])([0-9][0-9][0-9][0-9])";
 
     @Autowired
     private PaymentDAO paymentDAO;
 
-    @Override
-    public TransactionDTO generatePay(PayDTO newPayment) throws ValidationException {
-        validatePayment(newPayment);
-        return null;
-    }
-
-    private static void validatePayment(PayDTO newPayment) throws ValidationException {
-        if(!newPayment.getNumberAccount().matches(PATTERN_NUMBER_ACCOUNT)){
-            throw new InvalidAccountIdException();
-        }
-        BigDecimal numberZero = new BigDecimal(0);
-        if(newPayment.getAmount().compareTo(numberZero) <= 0){
-            throw new InvalidAmountException();
-        }
-        if(newPayment.getDate().length() != 8 || !newPayment.getDate().matches(DATE_PATTERN)) {
-            throw new InvalidPaymentDateException();
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        LocalDate paymentDate = LocalDate.parse(newPayment.getDate(), formatter);
-        LocalDate today = LocalDate.now();
-        if(paymentDate.isBefore(today)) {
-            throw new InvalidDateRangeException();
-        }
-    }
+    @Autowired
+    private Mapper mapper;
 
     @Override
     public PaymentMethodDTO createPaymentMethod(PaymentMethodDTO newPaymentMethod) {
@@ -57,8 +29,16 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentMethodDTO findPaymentMethodById(Long id) {
-        return null;
+    public PaymentMethodDTO findPaymentMethodById(Long id) throws TransactionServiceException {
+        if(id == null) {
+            throw new FieldNullException();
+        }
+        Optional<PaymentMethod> result = paymentDAO.findById(id);
+        if(!result.isEmpty()){
+            return mapper.map(result.get(), PaymentMethodDTO.class);
+        } else {
+            throw new TransactionInexistentException();
+        }
     }
 
     @Override

@@ -4,7 +4,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 
 public class InvalidDateRangeException extends ValidationException{
 
-    private static Integer CODE = 4;
+    private static Integer CODE = 5;
 
     private static String INVALID_DATE_RANGE_MSG = "La fecha del pago no es actual o proxima";
 

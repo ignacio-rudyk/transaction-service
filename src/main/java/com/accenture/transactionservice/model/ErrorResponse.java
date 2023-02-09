@@ -8,13 +8,20 @@ public class ErrorResponse {
 
     private Object data;
 
-    public ErrorResponse() {
-        super();
-    }
+    public ErrorResponse() { this(null); }
 
     public ErrorResponse(Object data) {
-        this.code = 0;
-        this.desc = new String();
+        this(new Integer(0) , new String(), data);
+    }
+
+    public ErrorResponse(Integer code, String desc) {
+        this(code , desc, null);
+    }
+
+    public ErrorResponse(Integer code, String desc, Object data) {
+        super();
+        this.code = code;
+        this.desc = desc;
         this.data = data;
     }
 

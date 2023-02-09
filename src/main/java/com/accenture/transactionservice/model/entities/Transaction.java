@@ -1,11 +1,7 @@
 package com.accenture.transactionservice.model.entities;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
@@ -20,15 +16,16 @@ public class Transaction {
     private BigDecimal amount;
 
     @Column(nullable = false)
-    @CreationTimestamp
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss:SS")
-    private Date createdAt;
+    private String datePayment;
 
     @Column(nullable = false)
     private Long paymentMethodId;
 
     @Column(nullable = false)
     private String cbuDestination;
+
+    @Column(nullable = false)
+    private  String sourceAccountNumber;
 
     public Transaction() {
         super();
@@ -50,12 +47,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getDatePayment() {
+        return datePayment;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setDatePayment(String datePayment) {
+        this.datePayment = datePayment;
     }
 
     public Long getPaymentMethodId() {
@@ -74,14 +71,24 @@ public class Transaction {
         this.cbuDestination = cbuDestination;
     }
 
+    public String getSourceAccountNumber() {
+        return sourceAccountNumber;
+    }
+
+    public void setSourceAccountNumber(String sourceAccountNumber) {
+        this.sourceAccountNumber = sourceAccountNumber;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", createdAt=" + createdAt +
+                ", createdAt=" + datePayment +
                 ", paymentMethodId=" + paymentMethodId +
                 ", cbuDestination='" + cbuDestination + '\'' +
+                ", sourceAccountNumber='" + sourceAccountNumber + '\'' +
                 '}';
     }
+
 }

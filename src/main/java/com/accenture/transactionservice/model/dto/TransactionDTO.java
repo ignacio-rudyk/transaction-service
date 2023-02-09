@@ -2,7 +2,6 @@ package com.accenture.transactionservice.model.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class TransactionDTO implements Serializable {
 
@@ -12,14 +11,23 @@ public class TransactionDTO implements Serializable {
 
     private BigDecimal amount;
 
-    private Date createdAt;
+    private String datePayment;
 
     private Long paymentMethodId;
 
     private String cbuDestination;
 
+    private String sourceAccountNumber;
+
     public TransactionDTO() {
         super();
+    }
+
+    public TransactionDTO(BigDecimal amount, String datePayment, Long paymentMethodId, String cbuDestination) {
+        this.amount = amount;
+        this.datePayment = datePayment;
+        this.paymentMethodId = paymentMethodId;
+        this.cbuDestination = cbuDestination;
     }
 
     public Long getId() {
@@ -38,12 +46,12 @@ public class TransactionDTO implements Serializable {
         this.amount = amount;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getDatePayment() {
+        return datePayment;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setDatePayment(String datePayment) {
+        this.datePayment = datePayment;
     }
 
     public Long getPaymentMethodId() {
@@ -62,15 +70,23 @@ public class TransactionDTO implements Serializable {
         this.cbuDestination = cbuDestination;
     }
 
+    public String getSourceAccountNumber() {
+        return sourceAccountNumber;
+    }
+
+    public void setSourceAccountNumber(String sourceAccountNumber) {
+        this.sourceAccountNumber = sourceAccountNumber;
+    }
+
     @Override
     public String toString() {
         return "TransactionDTO{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", createdAt=" + createdAt +
+                ", datePayment='" + datePayment + '\'' +
                 ", paymentMethodId=" + paymentMethodId +
-                ", cbu='" + cbuDestination + '\'' +
+                ", cbuDestination='" + cbuDestination + '\'' +
+                ", sourceAccountNumber='" + sourceAccountNumber + '\'' +
                 '}';
     }
-
 }

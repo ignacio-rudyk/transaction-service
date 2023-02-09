@@ -3,7 +3,7 @@ package com.accenture.transactionservice.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payment_methods")
+@Table(name = "payment_method")
 public class PaymentMethod {
 
     @Id
@@ -14,8 +14,8 @@ public class PaymentMethod {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "bean_operation_payment")
-    private String beanOperationPayment;
+    @Column(name = "bean_payment_operation")
+    private String beanPaymentOperation;
 
     public PaymentMethod() {
         super();
@@ -37,12 +37,12 @@ public class PaymentMethod {
         this.name = name;
     }
 
-    public String getBeanOperationPayment() {
-        return beanOperationPayment;
+    public String getBeanPaymentOperation() {
+        return beanPaymentOperation;
     }
 
-    public void setBeanOperationPayment(String beanOperationPayment) {
-        this.beanOperationPayment = beanOperationPayment;
+    public void setBeanPaymentOperation(String beanPaymentOperation) {
+        this.beanPaymentOperation = beanPaymentOperation;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PaymentMethod {
         return "PaymentMethod{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", beanOperationPayment='" + beanOperationPayment + '\'' +
+                ", beanOperationPayment='" + beanPaymentOperation + '\'' +
                 '}';
     }
 }
