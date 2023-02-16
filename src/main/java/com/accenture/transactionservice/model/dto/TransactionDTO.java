@@ -1,11 +1,10 @@
 package com.accenture.transactionservice.model.dto;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class TransactionDTO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     private Long id;
 
@@ -18,6 +17,10 @@ public class TransactionDTO implements Serializable {
     private String cbuDestination;
 
     private String sourceAccountNumber;
+
+    private Long sourceAccountId;
+
+    private Long destinationAccountId;
 
     public TransactionDTO() {
         super();
@@ -78,6 +81,22 @@ public class TransactionDTO implements Serializable {
         this.sourceAccountNumber = sourceAccountNumber;
     }
 
+    public Long getSourceAccountId() {
+        return sourceAccountId;
+    }
+
+    public void setSourceAccountId(Long sourceAccountId) {
+        this.sourceAccountId = sourceAccountId;
+    }
+
+    public Long getDestinationAccountId() {
+        return destinationAccountId;
+    }
+
+    public void setDestinationAccountId(Long destinationAccountId) {
+        this.destinationAccountId = destinationAccountId;
+    }
+
     @Override
     public String toString() {
         return "TransactionDTO{" +
@@ -87,6 +106,9 @@ public class TransactionDTO implements Serializable {
                 ", paymentMethodId=" + paymentMethodId +
                 ", cbuDestination='" + cbuDestination + '\'' +
                 ", sourceAccountNumber='" + sourceAccountNumber + '\'' +
+                ", sourceAccountId=" + sourceAccountId +
+                ", destinationAccountId=" + destinationAccountId +
                 '}';
     }
+
 }

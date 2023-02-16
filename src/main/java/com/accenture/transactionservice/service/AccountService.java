@@ -1,17 +1,16 @@
 package com.accenture.transactionservice.service;
 
 import com.accenture.transactionservice.exception.TransactionServiceException;
-import com.accenture.transactionservice.model.dto.SendingOfMoneyDTO;
-import com.accenture.transactionservice.model.dto.WithdrawalOfMoneyDTO;
+import com.accenture.transactionservice.model.dto.MoneyOperationDTO;
 
 public interface AccountService {
 
-    SendingOfMoneyDTO addAmount(SendingOfMoneyDTO sendingOfMoney) throws TransactionServiceException;
+    MoneyOperationDTO addAmount(MoneyOperationDTO addingMoney) throws TransactionServiceException;
 
-    WithdrawalOfMoneyDTO subtractAmount(WithdrawalOfMoneyDTO withdrawalOfMoney) throws TransactionServiceException;
+    MoneyOperationDTO subtractAmount(MoneyOperationDTO moneyTheft) throws TransactionServiceException;
 
-    Boolean existAccountByNumberAccount(String numberAccount) throws TransactionServiceException;
+    Long getAccountIdByCBU(String cbu) throws TransactionServiceException;
 
-    Boolean existAccountByCbu(String cbu) throws TransactionServiceException;
+    Long getAccountIdByNumberAccount(String numberAccount) throws TransactionServiceException;
 
 }

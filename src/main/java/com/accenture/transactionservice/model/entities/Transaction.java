@@ -22,10 +22,10 @@ public class Transaction {
     private Long paymentMethodId;
 
     @Column(nullable = false)
-    private String cbuDestination;
+    private Long sourceAccountId;
 
     @Column(nullable = false)
-    private  String sourceAccountNumber;
+    private Long destinationAccountId;
 
     public Transaction() {
         super();
@@ -63,20 +63,20 @@ public class Transaction {
         this.paymentMethodId = paymentMethodId;
     }
 
-    public String getCbuDestination() {
-        return cbuDestination;
+    public Long getSourceAccountId() {
+        return sourceAccountId;
     }
 
-    public void setCbuDestination(String cbuDestination) {
-        this.cbuDestination = cbuDestination;
+    public void setSourceAccountId(Long sourceAccountId) {
+        this.sourceAccountId = sourceAccountId;
     }
 
-    public String getSourceAccountNumber() {
-        return sourceAccountNumber;
+    public Long getDestinationAccountId() {
+        return destinationAccountId;
     }
 
-    public void setSourceAccountNumber(String sourceAccountNumber) {
-        this.sourceAccountNumber = sourceAccountNumber;
+    public void setDestinationAccountId(Long destinationAccountId) {
+        this.destinationAccountId = destinationAccountId;
     }
 
     @Override
@@ -84,10 +84,10 @@ public class Transaction {
         return "Transaction{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", createdAt=" + datePayment +
+                ", datePayment='" + datePayment + '\'' +
                 ", paymentMethodId=" + paymentMethodId +
-                ", cbuDestination='" + cbuDestination + '\'' +
-                ", sourceAccountNumber='" + sourceAccountNumber + '\'' +
+                ", sourceAccountId=" + sourceAccountId +
+                ", destinationAccountId=" + destinationAccountId +
                 '}';
     }
 
